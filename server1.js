@@ -188,42 +188,7 @@ app.get('/auth/info',authMiddleware,(req, res)=>{
     });
     
 })
-/*
-app.get('/auth/info',authMiddleware,(req, res)=>{
-    /*
-    Session {
-  cookie: { path: '/', _expires: null, originalMaxAge: null, httpOnly: true },
-  authData: {
-    kakao: {//1.이걸 갖고 오도록 한다.
-      access_token: 'KYDl6Dq7jfRim0vUvJ6upG45lXUoSobNs6qM5go9c04AAAF5m8xRhA',
-      token_type: 'bearer',
-      refresh_token: 'vmxubfzwiXflHldceOVFllZm0y0vTxorJ9-5Ngo9c04AAAF5m8xRhA',
-      expires_in: 21599,
-      scope: 'account_email profile',
-      refresh_token_expires_in: 5183999,
-      id: 1739929309,
-      connected_at: '2021-05-24T00:35:29Z',
-      properties: [Object],
-      kakao_account: [Object]
-    }
-  } *//*
-    const {authData} = req.session;
-    const provider = Object.keys(authData)[0];//'kakao'
-    console.log(provider);
-    let userinfo={};
-    switch(provider){
-        case "kakao":
-            userinfo = {
-                userid : authData[provider].properties.nickname,
-            }
-            //[code block]
-            break;
-    }
-    res.render('info',{
-        userinfo,
-    });
-    
-})*/
+
 
 /******************login page fetch연습*************************/
 app.post('/login2',(req,res)=>{
