@@ -1,0 +1,42 @@
+<form action="/login" method = "post">
+    <input type = "text" name = "userid">
+    <input type = "password" name = "userpw">
+    <input type = "submit" value = "login"></form>
+
+</form>
+
+
+<button class="req">request</button>
+<span class="root">
+
+</span>
+
+<script type = "text/javascript">
+const btn = document.querySelector('.req');
+btn.addEventListener('click',()=>{
+    console.log('req click');
+    //첫째 인잣값url, 두번째 인자값은 options=>object
+    fetch('http://localhost:3000/login2',{
+        method:'post',
+        // headers:{
+        //     'Content-type:':'application/json'
+        // },
+        body:
+            JSON.stringify({a:1,b:2})
+            //JSON.stringify:우리가 만든 객체를 string으로 바꿔서 보내줌.
+    })
+.then(data=>{
+    console.log(data);//처리결과 객체를 반환
+    return data.json();
+
+    //data:응답 브라우저창의 console
+})
+.then(json=>{
+    console.log(json);
+    json.test//ok
+    const root = document.querySelector('.root');
+    root.innerHTML = json.test;
+})
+})
+
+</script>
