@@ -55,11 +55,8 @@ app.get('/auth/kako', (req, res)=>{
 
 app.get('/auth/kakao/callback', async (req, res)=>{
     //axios => Promise Object
-    //console.log(req);
     const {session,query} =req;//객체 구조분해>기본변수 할당
     const {code} = query;//req.query.code =>code
-    //userid와 userpw 값을 가지고 DB조회하는게 맞음.
-    //userid : root userpw:root
     
     try{
         token = await axios({
@@ -67,15 +64,14 @@ app.get('/auth/kakao/callback', async (req, res)=>{
                 url: 'https://kauth.kakao.com/oauth/token',
                 headers:{
                     'content-type':'application/x-www-form-urlencoded'
-                }, // npm install qs
-                data:qs.stringify({
+                }, 
+                data:qs.stringify({// 객체를 String으로 변환.
                     grant_type:'authorization_code', // 특정 스트링 
                     client_id:kakao.clientID,
                     client_secret:kakao.clientSecret,
                     redirectUri:kakao.redirectUri,
-                    //code:req.query.code,
                     code,
-                }) // 객체를 String으로 변환.
+                }) 
         })
     }catch(err){
         res.json(err.data);
@@ -281,8 +277,8 @@ app.get('/auth/kakao/unlink',authMiddleware,async(req,res)=>{
 
 /***********************로그아웃*****************************/
 app.get('/auth/logout',(req,res)=>{
-    const {authData} = req.session;//모르겠다.
-    const provider = Object.keys(authData)[0];//모르겠다
+    const {authData} = req.session;
+    const provider = Object.keys(authData)[0];
     delete req.session.authData;
     res.redirect('/?msg=logoutsuccess');
     // req.session.destroy(()=>{
